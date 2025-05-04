@@ -39,19 +39,26 @@ def random_mouse_move(driver):
         driver.execute_script("window.scrollBy(0, 250);")
         time.sleep(1)
 
-link_list = [
-    "https://vidoza.net/8193axbknvto.html",
-    "https://vidoza.net/49zpjy1rsjo1.html",
-    "https://vidoza.net/qaa0w816elml.html",
-    "https://vidoza.net/74eb28jag82j.html",
-    "https://vidoza.net/6ed6ivawned3.html",
-    "https://vidoza.net/dr7txnc1np5u.html",
-    "https://vidoza.net/v4hvfnl6l1zs.html",
-    "https://vidoza.net/vddxot92drvn.html"
-]
+import requests
 
+# URL chứa file .txt
+url = "https://raw.githubusercontent.com/talblubClouby96/videzz_video/refs/heads/main/links.txt"
+
+# Tải nội dung từ URL
+response = requests.get(url)
+response.raise_for_status()  # Gây lỗi nếu tải thất bại
+
+# Chuyển mỗi dòng thành một phần tử trong list
+link_list = response.text.strip().splitlines()
+
+# Chọn ngẫu nhiên 2 link
 selected_links = random.sample(link_list, 2)
+
+# Nhân đôi danh sách đã chọn
 selected_links = selected_links + selected_links
+
+print(selected_links)
+
 
 def run_main_selenium():
     for link in selected_links:
